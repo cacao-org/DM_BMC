@@ -37,16 +37,16 @@
 #include <sched.h>
 
 #include <semaphore.h>
+#include <sys/time.h>
 
 #include "bmc_mdlib.h"
 
-#include <ImageStruct.h> // cacao data structure
-
-#include "ImageCreate.h"
-
+#include <ImageStruct.h>   // cacao data structure definition
+#include <ImageStreamIO.h> // function ImageStreamIO_read_sharedmem_image_toIMAGE()
 
 
-long read_sharedmem_image_toIMAGE(const char *name, IMAGE *image);
+
+//long read_sharedmem_image_toIMAGE(const char *name, IMAGE *image);
 
 
 
@@ -1092,6 +1092,9 @@ tU32					d2[kBIGDATA];
 
 	return;
 }
+
+
+
 /*--------------------------------------------------------------------------*/
 static tD GetTOD(void)
 /*
@@ -1108,6 +1111,9 @@ tD				ans=0.0;
 
 	return(ans);
 }
+
+
+
 /*--------------------------------------------------------------------------*/
 static void DoTestTime(tU32 nLoops)
 /*
@@ -1501,7 +1507,7 @@ static int dm2k_realtimeloop()
 	SMdmvolt = (IMAGE*) malloc(sizeof(IMAGE));
 
     // CONNECT TO VOLT MAP SHARED MEMORY
-    read_sharedmem_image_toIMAGE(DMVOLT_FILENAME, &SMdmvolt[0]);
+    ImageStreamIO_read_sharedmem_image_toIMAGE(DMVOLT_FILENAME, &SMdmvolt[0]);
    
     
   /*  SMdmvoltfd = open(DMVOLT_FILENAME, O_RDWR, (mode_t)0600);
@@ -1923,8 +1929,11 @@ int main(int argc, char **argv)
 
 
 
-
-long read_sharedmem_image_toIMAGE(const char *name, IMAGE *image)
+/*
+long read_sharedmem_image_toIMAGE(
+	const char *name, 
+	IMAGE *image
+	)
 {
     int SM_fd;
     struct stat file_stat;
@@ -2163,7 +2172,7 @@ long read_sharedmem_image_toIMAGE(const char *name, IMAGE *image)
     return(rval);
 }
 
-
+*/
 
 
 
