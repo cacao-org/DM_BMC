@@ -7,10 +7,22 @@
 	2015-2018			Modified for cacao support
 	 
 	 
-	To run loop:
+	To build:
+	gcc -o runBMCcacao bmc_ltest.c -L../../lib -lrt -lbmcmd -lm -lpthread -limagestreamio
+	 
+	Required files:
+	bmc_ltest.c (this file)
+	bmc_mdlib.h
+	../../lib/libbmcmd.a
+	ImageStreamIO shared library 
+	 
+	To run loop, execute :
 	./bmc_ltest -K      # initialize board for 2k DM
 	./bmc_ltest -D 0    # set driver spin delay count to 0
 	./bmc_ltest -L      # real time control loop
+	
+	if sudo permission required, make sure sudo inherits LD_LIBRARY_PATH to find libimagestreamio:
+	sudo -E env LD_LIBRARY_PATH=${LD_LIBRARY_PATH} ./runBMCcacao -K 
 
 *****************************************************************************/
 
@@ -43,7 +55,6 @@
 
 #include <ImageStruct.h>   // cacao data structure definition
 #include <ImageStreamIO.h> // function ImageStreamIO_read_sharedmem_image_toIMAGE()
-
 
 
 //long read_sharedmem_image_toIMAGE(const char *name, IMAGE *image);
