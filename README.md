@@ -3,7 +3,7 @@
 
 To build:
 
-	gcc -o runBMCcacao bmc_ltest.c -L../../lib -lrt -lbmcmd -lm -lpthread -limagestreamio
+	gcc -o runBMCcacao runBMCcacao.c -L../../lib -lrt -lbmcmd -lm -lpthread -limagestreamio
 
 Required files:
 - runBMCcacao.c
