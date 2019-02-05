@@ -3,12 +3,12 @@
 
 To build:
 
-	gcc -o runBMCcacao runBMCcacao.c -L../DMoptical/lib/ -I../DMoptical/src/inc/  -lrt -lbmcmd -lm -lpthread -limagestreamio
+	gcc -o runBMCcacao runBMCcacao.c -L../DMoptical/lib/ -I../DMoptical/src/inc/  -lrt -lbmcmd -lm -lpthread -lImageStreamIO
 
 Required files:
 - runBMCcacao.c
 - bmc_mdlib.h
-- ../../lib/libbmcmd.a
+- libbmcmd.a
 - ImageStreamIO shared library
 
 To run loop, execute :
