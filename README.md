@@ -3,7 +3,7 @@
 
 To build:
 
-	gcc -o runBMCcacao runBMCcacao.c -L../../lib -lrt -lbmcmd -lm -lpthread -limagestreamio
+	gcc -o runBMCcacao runBMCcacao.c -L../DMoptical/lib/ -I../DMoptical/src/inc/  -lrt -lbmcmd -lm -lpthread -limagestreamio
 
 Required files:
 - runBMCcacao.c
