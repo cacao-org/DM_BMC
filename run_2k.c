@@ -4,11 +4,12 @@
             Modified to integrate with cacao
 
   Nov 1, 2014			CIW/SJT original entry, � Copyright 2014, Boston Micromachines Corporation. All rights reserved.
-  2015-2018			Modified for cacao support
+  2015-2018			  Modified for cacao support
+  2022            Shrink down to minimal SCExAO functionality
 
 
   To build:
-  gcc -o runBMCcacao bmc_ltest.c -L../../lib -lrt -lbmcmd -lm -lpthread -limagestreamio
+  ./compile-exec.sh (sudo prompt will show up, that's for suid permission)
 
   Required files:
   bmc_ltest.c (this file)
@@ -21,8 +22,7 @@
   ./bmc_ltest -D 0    # set driver spin delay count to 0
   ./bmc_ltest -L      # real time control loop
 
-  if sudo permission required, make sure sudo inherits LD_LIBRARY_PATH to find libimagestreamio:
-  sudo -E env LD_LIBRARY_PATH=${LD_LIBRARY_PATH} ./runBMCcacao -K
+  Follow the compile-exec.sh for include path
 
 *****************************************************************************/
 
@@ -85,7 +85,6 @@ static void show_help(void)
   SHOW(("   -A               Run -K, -D 0, -L\n"));
 }
 
-
 static int dm2k_realtimeloop()
 {
   long ActIndex[50][50];
@@ -138,6 +137,7 @@ static int dm2k_realtimeloop()
       }
     }
   }
+  printf("\n");
 
   SMdmvolt = (IMAGE *)malloc(sizeof(IMAGE));
 
@@ -150,7 +150,7 @@ static int dm2k_realtimeloop()
   printf("ENTERING LOOP\n");
   fflush(stdout);
   cntloop = 0;
-  while ((SMdmvolt[0].md[0].status < 100)) //&&(cntloop<10000))
+  while ((end == 0) && (SMdmvolt[0].md[0].status < 100)) //&&(cntloop<10000))
   {
     cnt0 = SMdmvolt[0].md[0].cnt0;
     if ((cnt0 > framecnt) && (SMdmvolt[0].md[0].write == 0)) // new frame is here... apply on DM
@@ -327,6 +327,8 @@ int main(int argc, char **argv)
   set_rt_priority();
 
   sArgv0 = *argv;
+
+  sBMC = NULL;
 
   decode_args(argc, argv);
 

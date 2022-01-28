@@ -37,7 +37,7 @@
 #define kBIGDATA 4096
 #define kSMALLDATA 2048
 
-static tBMC sBMC = NULL;
+tBMC sBMC; // Must not be static, must not be defined. Defined in run_2k.c:main and in...
 static tU16 size_2k = 4096;
 static tU16 minlut_2k = 0;
 
