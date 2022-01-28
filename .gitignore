@@ -1,1 +1,6 @@
 runBMCcacao
+.vscode
+run_2k_main
+ImageStreamIO.h
+ImageStruct.h
+bmc_mdlib.h
