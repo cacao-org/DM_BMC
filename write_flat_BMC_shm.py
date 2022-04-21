@@ -686,7 +686,7 @@ Shape_2900nm = np.array([0.794163180052670,
 
 
 
-dmvolt.set_data(Shape_500nm_GLINT.astype(np.float64))
+dmvolt.set_data(0.*Shape_1500nm.astype(np.float64))
 
 # -----------------------------------------------------------------------------
 # Close shared memory
