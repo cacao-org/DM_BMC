@@ -2,7 +2,6 @@
 
 run_2k_main
 createBMCshm
-runBMCcacao
 runBMChex111
 
 *.npy
