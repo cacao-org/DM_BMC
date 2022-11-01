@@ -54,7 +54,7 @@
 #define DMVOLT_FILENAME "dmvolt"
 
 static int status_exit = 0; // program exit code
-static int end = 0; // termination flag for funcs
+static int end = 0;         // termination flag for funcs
 
 struct timespec tnow;
 double tnowdouble;
@@ -65,13 +65,11 @@ double dt_update_lim = 3600.0; // if no command is received during this time, se
 
 IMAGE *SMdmvolt;
 
-
 // Termination function for SIGINT callback
 static void endme(int dummy)
 {
   end = 1;
 }
-
 
 static char *sArgv0 = NULL; // name of executable
 
@@ -131,7 +129,8 @@ static int dm2k_realtimeloop()
         ActIndex[sx][sy] = s;
         printf("[%4ld %4ld -> %4ld]", (long)sx, (long)sy, (long)ActIndex[sx][sy]);
         s++;
-        if (s % 8 == 7) {
+        if (s % 8 == 7)
+        {
           printf("\n");
         }
       }
@@ -224,7 +223,8 @@ static void decode_args(int argc, char **argv)
   argv += 1;
   argc -= 1; /* skip program name */
 
-  if (argc == 0) {
+  if (argc == 0)
+  {
     show_help();
     return;
   }
@@ -267,7 +267,7 @@ static void decode_args(int argc, char **argv)
       set_spin_delay(0);
       dm2k_realtimeloop();
       break;
-    
+
     default:
       show_help();
       break;
@@ -282,40 +282,38 @@ static void decode_args(int argc, char **argv)
 static void set_rt_priority()
 {
 
-    uid_t ruid; // Real UID (= user launching process at startup)
-    uid_t euid; // Effective UID (= owner of executable at startup)
-    uid_t suid; // Saved UID (= owner of executable at startup)
+  uid_t ruid; // Real UID (= user launching process at startup)
+  uid_t euid; // Effective UID (= owner of executable at startup)
+  uid_t suid; // Saved UID (= owner of executable at startup)
 
-    int RT_priority = 93; //any number from 0-99
-    struct sched_param schedpar;
-    int ret;
+  int RT_priority = 93; // any number from 0-99
+  struct sched_param schedpar;
+  int ret;
 
-    getresuid(&ruid, &euid, &suid);
+  getresuid(&ruid, &euid, &suid);
 
-    //This sets it to the privileges of the normal user
-    ret = seteuid(ruid);
-    if (ret != 0)
-    {
-        SHOW(("setuid error\n"));
-    }
+  // This sets it to the privileges of the normal user
+  ret = seteuid(ruid);
+  if (ret != 0)
+  {
+    SHOW(("setuid error\n"));
+  }
 
-    schedpar.sched_priority = RT_priority;
+  schedpar.sched_priority = RT_priority;
 
-    if (ret != 0)
-    {
-        SHOW(("setuid error\n"));
-    }
-    ret = seteuid(euid); //This goes up to maximum privileges
-    sched_setscheduler(0, SCHED_FIFO,
-                       &schedpar); //other option is SCHED_RR, might be faster
-    ret = seteuid(ruid);           //Go back to normal privileges
-    if (ret != 0)
-    {
-        SHOW(("setuid error\n"));
-    }
+  if (ret != 0)
+  {
+    SHOW(("setuid error\n"));
+  }
+  ret = seteuid(euid); // This goes up to maximum privileges
+  sched_setscheduler(0, SCHED_FIFO,
+                     &schedpar); // other option is SCHED_RR, might be faster
+  ret = seteuid(ruid);           // Go back to normal privileges
+  if (ret != 0)
+  {
+    SHOW(("setuid error\n"));
+  }
 }
-
-
 
 /*
 **	Main

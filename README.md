@@ -16,6 +16,9 @@ To run loop, execute :
 	./runBMCcacao -K      # initialize board for 2k DM
 	./runBMCcacao -D 0    # set driver spin delay count to 0
 	./runBMCcacao -L      # real time control loop
+	
+Or all in one: 
+    ./runBMCcacao -A      (equiv -K, -D 0, -L)
 
 If sudo permission required, make sure sudo inherits LD_LIBRARY_PATH to find libimagestreamio:
 
