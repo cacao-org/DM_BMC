@@ -2,25 +2,47 @@ from pyMilk.interfacing.isio_shmlib import SHM as shm
 import time
 import numpy as np
 
+dmptt = shm(
+    "dmptt",
+    verbose=False)  # initialize the shm containing piston tip and tilt values
+dm_command = np.zeros(
+    111, dtype=np.float64)  # command sent to MEMS must be a double
 
-dmptt      = shm("dmptt", verbose=False)
-dm_command = np.zeros(111)
+# NOTES : tip/tilt values in radians. [min;max] = [-1e-3 ; 1e-3]
+#         piston values in nanometers
 
-# dm_command[16*3+1] = 6.e-4
-# dm_command[16*3+2] = -6.e-4
-# dm_command[1*3+2] = 
+# dm_command[3*3+2] = -1.e-3
+# dm_command[3*3+1] = -1.e-3
+# dm_command[3*33+2] = -1.e-3
+# dm_command[3*33+1] = -1.e-3
 
-# for k in range(37):
-    # dm_command = np.zeros(111)
-    # dm_command[3*k] = 0
-    # dm_command[k*3+2] = -6.e-4
-    
-    # dmptt.set_data(dm_command.astype(np.float32))
-    # time.sleep(0.5)
+# dm_command[3*21] = -2000
+# dm_command[3*21+2] = -2.e-3
+# dm_command[3*21+1] = -2.e-3
+# dmptt.set_data(dm_command.astype(np.float64))
 
+for k in range(37):
+    # dm_command  = np.zeros(111, dtype=np.float64)
+    dm_command[k * 3] = -2000
+    dm_command[k * 3 + 2] = 2.e-3
+    dm_command[k * 3 + 1] = 2.e-3
+
+# for i in np.arange(-3,3):
+#     for j in np.arange(-3,3):
+#         dm_command[29*3] = -2000
+#         dm_command[29*3+2] = i*1e-3
+#         dm_command[29*3+1] = j*1e-3
+#         dmptt.set_data(dm_command.astype(np.float64))
+#         time.sleep(0.5)
+#         print(i,j)
+
+dmptt.set_data(dm_command.astype(np.float64))
+
+#     time.sleep(1.)
+
+# time.sleep(5.)
 # dm_command = np.zeros(111)
-dmptt.set_data(dm_command.astype(np.float32))
-
+# dmptt.set_data(dm_command.astype(np.float64))
 # -----------------------------------------------------------------------------
 # Close shared memory
 # -----------------------------------------------------------------------------

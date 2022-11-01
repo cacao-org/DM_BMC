@@ -44,7 +44,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGE.
 *******************************************************************************/
 
-#include "stdafx.h"
 
 #include <BMCApi.h>
 
@@ -126,8 +125,8 @@ int main(int argc, char* argv[])
 
 
 	// Add Static Serial Number
-	// FIRST : strcpy(serial_number, "32AW005#010");
-	strcpy(serial_number, "32AW038#027");
+	strcpy(serial_number, "32AW005#010");
+	// GLINT : strcpy(serial_number, "32AW038#027");
 
 	// Open driver
     memset(&hdm, 0, sizeof(hdm));
@@ -158,7 +157,7 @@ int main(int argc, char* argv[])
 	NBkw = 10;
 	CBsize = 0;
 
-	atype = _DATATYPE_FLOAT;
+	atype = _DATATYPE_DOUBLE;
 	imsize = (uint32_t *) malloc(sizeof(uint32_t)*naxis);
 	imsize[0] = hdm.ActCount;
 	ImageStreamIO_createIm(bmc_array, DMVOLT_FILENAME, naxis, imsize, atype, shared, NBkw, CBsize);

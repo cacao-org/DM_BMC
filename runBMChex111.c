@@ -1,5 +1,3 @@
-#include "stdafx.h"
-
 #include <BMCApi.h>
 
 #include <stdlib.h>
@@ -26,7 +24,7 @@ double tnowdouble;
 double tlastupdatedouble;
 
 double dt_update;              // time since last update
-double dt_update_lim = 3600.0; // if no command is received during this time, set DM to zero V [sec]
+double dt_update_lim = 360000000000000.0; // if no command is received during this time, set DM to zero V [sec]
 /*==========================================================================*/
 
 static int loop_abort = 0; // termination flag
@@ -113,8 +111,8 @@ int main(int argc, char *argv[])
     ShowHelp();
 
     // Add Static Serial Number
-    // FIRST DM : strcpy(serial_number, "32AW005#010");
-    strcpy(serial_number, "32AW038#027");
+    strcpy(serial_number, "32AW005#010");
+    // strcpy(serial_number, "32AW038#027");
 
     // Open driver
     memset(&hdm, 0, sizeof(hdm));
@@ -125,7 +123,7 @@ int main(int argc, char *argv[])
         printf("Error %d opening the driver type %u.\n", rv, (unsigned int)hdm.Driver_Type);
         printf("%s\n\n", BMCErrorString(rv));
     }
-    rv = BMCLoadCalibrationFile(&hdm, "/opt/Boston Micromachines/Calibration/LUT_32AW038#027.mat");
+    rv = BMCLoadCalibrationFile(&hdm, "/opt/Boston Micromachines/Calibration/LUT_32AW005#010.mat");
     printf("Boston Micromachines C API Example.\n");
     printf("Opened Device %d with %d actuators.\n", hdm.DevId, hdm.ActCount);
 
