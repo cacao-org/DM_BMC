@@ -3,7 +3,7 @@
 	bmc_ltest.c			Boston Micromachines Corp. library test program
 						Modified to integrate with cacao
 
-	Nov 1, 2014			CIW/SJT original entry, © Copyright 2014, Boston Micromachines Corporation. All rights reserved.
+	Nov 1, 2014			CIW/SJT original entry, ï¿½ Copyright 2014, Boston Micromachines Corporation. All rights reserved.
 	2015-2018			Modified for cacao support
 	 
 	 
