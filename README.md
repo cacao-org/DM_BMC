@@ -1,6 +1,14 @@
 # cacao hardware interface to BMC 2k DM
 
 
+##[DEPRECATED 2022/11/01]
+
+Merged into [scexao-org/hardwaresecrets](https://github.com/scexao-org/hardwaresecrets) under (respectively) `interfaces/bmc2k` and `interfaces/bmc111`.
+
+See you there!
+
+## Previous content.
+
 To build:
 
 	gcc -o runBMCcacao runBMCcacao.c -L../DMoptical/lib/ -L/usr/local/milk/lib -I../DMoptical/src/inc/ -I/usr/local/milk/include/ImageStreamIO -lrt -lbmcmd -lm -lpthread -lImageStreamIO -Wl,-rpath=/usr/local/milk/lib
